@@ -963,11 +963,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\source\\codeworks\\Keepr\\keepr-server\\amazen-server.csproj",
+      "projectUniqueName": "C:\\source\\codeworks\\Keepr\\amazen-server\\amazen-server.csproj",
       "projectName": "amazen-server",
-      "projectPath": "C:\\source\\codeworks\\Keepr\\keepr-server\\amazen-server.csproj",
+      "projectPath": "C:\\source\\codeworks\\Keepr\\amazen-server\\amazen-server.csproj",
       "packagesPath": "C:\\Users\\12088\\.nuget\\packages\\",
-      "outputPath": "C:\\source\\codeworks\\Keepr\\keepr-server\\obj\\",
+      "outputPath": "C:\\source\\codeworks\\Keepr\\amazen-server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\12088\\AppData\\Roaming\\NuGet\\NuGet.Config"
