@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using amazen_server.Repositories;
+using amazen_server.Services;
 using CodeWorks.Auth0Provider;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -64,6 +66,12 @@ namespace keepr_server
       });
 
       services.AddScoped<IDbConnection>(x => CreateDbConnection());
+      services.AddTransient<ProfilesService>();
+      services.AddTransient<ProfilesRepository>();
+      services.AddTransient<KeepsService>();
+      services.AddTransient<KeepsRepository>();
+
+      
 
 
       // REVIEW Do you want to do something here?

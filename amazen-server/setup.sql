@@ -38,3 +38,7 @@
 --   REFERENCES profiles(id)
 --   ON DELETE CASCADE
 -- )
+
+-- ALTER TABLE  keeps
+-- DROP COLUMN keeps,
+-- ADD COLUMN keepCount int NOT NULL
