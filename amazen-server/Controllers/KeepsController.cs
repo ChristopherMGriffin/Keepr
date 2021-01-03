@@ -79,5 +79,21 @@ namespace amazen_server.Controllers
                 return BadRequest(e.Message);
             }
         }
+         [HttpPut("{id}")]
+        [Authorize]
+        public async Task<ActionResult<Keep>> Edit(int id, [FromBody] Keep keep)
+        {
+            try
+            {
+                Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+                keep.Id = id;
+                return Ok(_ks.Edit(keep, userInfo.Id));
+            }
+            catch (System.Exception e)
+            {
+                
+                return BadRequest(e.Message);
+            }
+        }
     }
 }

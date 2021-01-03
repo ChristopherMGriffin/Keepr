@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
 using amazen_server.Models;
 using Dapper;
@@ -28,6 +29,12 @@ namespace amazen_server.Repositories
       (@Name, @Picture, @Email, @Id)";
       _db.Execute(sql, userInfo);
       return userInfo;
+    }
+
+    public IEnumerable<Profile> GetAllProfiles()
+    {
+      string sql = "SELECT * FROM profiles";
+      return (IEnumerable<Profile>)_db.Query(sql);
     }
   }
 }

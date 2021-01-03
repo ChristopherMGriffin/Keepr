@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using amazen_server.Models;
 using amazen_server.Repositories;
 
@@ -29,7 +30,7 @@ namespace amazen_server.Services
     }
     public string Delete(int id, string userId)
     {
-      Keep keep =_repo.GetOne(id);
+      Keep keep =_repo.GetEdit(id);
       if (keep == null)
       {
         throw new Exception("Keep not found");
@@ -43,6 +44,25 @@ namespace amazen_server.Services
         return "Keep Deleted";
       }
       return "Delete Unsuccessful";
+    }
+      internal Keep Edit(Keep keep, string userId)
+    {
+      Keep original = _repo.GetEdit(keep.Id);
+      if (original == null)
+      {
+        throw new Exception("Invalid Keep");
+      }
+      if (original.creatorId != userId)
+      {
+        throw new Exception("Unauthorized");
+      }
+      _repo.Edit(keep);
+      return _repo.GetEdit(keep.Id);
+    }
+
+    internal IEnumerable<Keep> GetKeepsByProfile(string pId, string uId)
+    {
+      return _repo.GetKeepsByProfile(pId).ToList().FindAll(k => k.creatorId == uId || !k.IsPrivate);
     }
   }
 }

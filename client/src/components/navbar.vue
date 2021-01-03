@@ -1,14 +1,45 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center">
-        <img
-          alt="logo"
-          src="../assets/img/cw-logo.png"
-          height="45"
-        />
+  <nav class="navbar sticky p-0 d-flex justify-content-between">
+    <div class="col-2 col-sm-1 mr-4">
+      <router-link class="navbar-brand" :to="{ name: 'Home' }">
+        <div class="d-flex flex-column align-items-center">
+          <img
+            alt="logo"
+            src="../assets/img/klogo.png"
+            height="45"
+          />
+        </div>
+      </router-link>
+    </div>
+    <div class="col-sm-5 col-md-6 d-flex align-items-center">
+      <div class="input-group mt-2">
+        <!-- <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-default">Default</span>
+            </div> -->
+        <input type="text" class="form-control mb-2" aria-label="Default" aria-describedby="inputGroup-sizing-default">
       </div>
-    </router-link>
+    </div>
+    <div class="col-sm-1 col-md-2 p d-flex justify-content-end">
+      <button
+        class="btn btn-outline-primary text-uppercase"
+        @click="login"
+        v-if="!user.isAuthenticated"
+      >
+        Log in
+      </button>
+      <button
+        class="btn btn-outline-primary text-uppercase"
+        @click="logout"
+        v-if="user.isAuthenticated"
+      >
+        Log out
+      </button>
+      <!-- <button @click="logout" v-else class="p-0 btn-bg border-light rounded text-light btn-block btn-sm">
+        Log Out
+      </button> -->
+    </div>
+    <!--
+
     <button
       class="navbar-toggler"
       type="button"
@@ -74,7 +105,7 @@
           </div>
         </div>
       </span>
-    </div>
+    </div> -->
   </nav>
 </template>
 
@@ -123,5 +154,8 @@ a:hover {
 }
 .nav-item .nav-link.router-link-exact-active{
   color: var(--primary);
+}
+.navbar {
+  background-color:#55efc4 ;
 }
 </style>

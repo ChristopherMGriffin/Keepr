@@ -81,7 +81,7 @@ namespace keepr_server
 
     private IDbConnection CreateDbConnection()
     {
-      string connectionString = Configuration.GetSection("DB").GetValue<string>("gearhost");
+      string connectionString = Configuration.GetSection("db").GetValue<string>("gearhost");
       return new MySqlConnection(connectionString);
     }
 

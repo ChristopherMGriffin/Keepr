@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using amazen_server.Models;
 using amazen_server.Repositories;
 
@@ -21,6 +22,11 @@ namespace amazen_server.Services
         return _repo.Create(userInfo);
       }
       return foundProfile;
+    }
+
+    public IEnumerable<Profile> GetAllProfiles()
+    {
+      return _repo.GetAllProfiles();
     }
   }
 }
