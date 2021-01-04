@@ -20,9 +20,18 @@ namespace amazen_server.Services
       return _repo.Get();
     }
 
-    public Vault GetOne(int id)
+    public Vault GetOne(int id, string userId)
     {
-      return _repo.GetOne(id);
+     Vault vault = _repo.GetOne(id);
+      if (vault == null)
+      {
+        throw new Exception("Vault not found");
+      }
+      if (!vault.IsPublished && vault.creatorId != userId )
+      {
+        throw new Exception("Unauthorized Action");
+      }
+      return vault;
     }
 
     public Vault Create(Vault newVault)
@@ -64,9 +73,11 @@ namespace amazen_server.Services
       return _repo.GetOne(vault.Id);
     }
 
-    internal object GetVaultsByProfile(string profileId)
+   
+
+    internal Vault  GetProfileVaults(string id1, string id2)
     {
-      return _repo.GetVaultsByProfile(profileId);
+      throw new NotImplementedException();
     }
   }
 }

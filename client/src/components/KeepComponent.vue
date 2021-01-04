@@ -76,7 +76,7 @@
                   </div>
                 </div>
                 <div class="row border-top border-dark mt-3 justify-content-center mr-1">
-                  <div class="p-1 col-12">
+                  <div id="tags" class="p-1 col-12">
                     <button class="btn btn-link">
                       tag 1
                     </button>
@@ -95,23 +95,43 @@
                     <button class="btn btn-link">
                       tag 6
                     </button>
+                    <button class="btn btn-link">
+                      tag 7
+                    </button>
+                    <button class="btn btn-link">
+                      tag 8
+                    </button>
                   </div>
                 </div>
                 <div class="row  pl-0 justify-content-space-between">
                   <div class="col-3 pl-1">
-                    <div class="container">
-                      <button id="vaultdoor" class="btn border rounded dropdown-toggle" type="button" data-toggle="dropdown">
+                    <div>
+                      <!-- <button id="vaultdoor" class="btn border rounded dropdown-toggle" type="button" data-toggle="dropup">
                         ADD TO VAULT
                         <span class="caret"></span>
-                      </button>
-                      <div class="dropup">
-                        <ul class="dropdown-menu row">
-                          <li><button class="col-12 btn btn-block btn-link">Create New Vault</button></li>
-                          <li><a href="#">CSS</a></li>
-                          <li><a href="#">JavaScript</a></li>
-                          <li class="divider"></li>
-                          <li><a href="#">About Us</a></li>
-                        </ul>
+                      </button> -->
+
+                      <div class="btn-group btn-block dropup pl-0">
+                        <button id="vaultdoor"
+                                type="button"
+                                class="ml-0 btn border rounded dropdown-toggle"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                        >
+                          Add To Wishlist
+                        </button>
+                        <div class="dropdown-menu">
+                          <!-- Dropdown menu links -->
+                          <ul class="row p-0 m-0">
+                            <!-- <li class="col-12">
+                              <button type="button" class="btn btn-block btn-smbtn-link" data-toggle="modal" data-target="#modelId">
+                                Create New Wishlist
+                              </button>
+                            </li> -->
+                            <vault-menu-component v-for="w in wishlists" :key="w.id" :w="w" />
+                          </ul>
+                        </div>
                       </div>
                     </div>
                     <!-- </div> -->
@@ -257,7 +277,14 @@ i {
 }
 #vaultdoor {
   color: #55efc4;
-
+}
+#tags {
+  white-space: nowrap;
+  overflow-x: auto;
+  margin-bottom: 3px;
+}
+ul {
+  list-style-type: none;
 }
 
 // #modelId+kprops.id {

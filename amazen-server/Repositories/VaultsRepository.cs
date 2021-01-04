@@ -17,7 +17,7 @@ namespace amazen_server.Services
     }
     public IEnumerable<Vault> Get()
     {
-      string sql = populateCreator;
+      string sql = populateCreator + " WHERE isPublished = 1";
       return _db.Query<Vault, Profile, Vault>(sql, (vault, profile) => { vault.Creator = profile; return vault; }, splitOn: "id");
     }
 
@@ -31,9 +31,9 @@ namespace amazen_server.Services
     {
       string sql = @"
       INSERT INTO vaults
-      (title, creatorId, isPublished)
+      (name, creatorId, isPublished, description)
       VALUES
-      (@Title, @CreatorId, @IsPublished);";
+      (@Name, @CreatorId, @IsPublished, @Description);";
       return _db.ExecuteScalar<int>(sql, newVault);
     }
 
@@ -49,7 +49,7 @@ namespace amazen_server.Services
       string sql = @"
      UPDATE vaults
      SET
-     title = @Title,
+     name = @Name,
      isPublished = @IsPublished
      Where id = @Id;";
       _db.Execute(sql, vault);

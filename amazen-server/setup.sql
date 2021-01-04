@@ -45,5 +45,6 @@
 
 ALTER TABLE keeps
 -- ADD COLUMN isPrivate TINYINT
-MODIFY COLUMN description VARCHAR(955)
+-- MODIFY COLUMN description VARCHAR(955)
+MODIFY COLUMN keepCount int DEFAULT 0
 
