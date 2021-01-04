@@ -43,5 +43,7 @@
 -- DROP COLUMN keeps,
 -- ADD COLUMN keepCount int NOT NULL
 
--- ALTER TABLE keeps
+ALTER TABLE keeps
 -- ADD COLUMN isPrivate TINYINT
+MODIFY COLUMN description VARCHAR(955)
+
