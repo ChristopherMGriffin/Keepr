@@ -6,11 +6,11 @@ namespace amazen_server.Models
     public string creatorId { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
-    public string Image { get; set; }
+    public string Img { get; set; }
     public int Views { get; set; }
+    public bool isPrivate { get; set; }
     public int Shares { get; set; }
-    public int KeepCount { get; set; }
-    public bool IsPrivate { get; set; }
+    public int Keeps { get; set; }
     public Profile Creator { get; set; }
   }
 

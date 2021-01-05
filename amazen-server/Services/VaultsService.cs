@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using amazen_server.Repositories;
 using amazen_server.Models;
+using System.Linq;
 
 namespace amazen_server.Services
 {
@@ -25,11 +26,11 @@ namespace amazen_server.Services
      Vault vault = _repo.GetOne(id);
       if (vault == null)
       {
-        throw new Exception("Vault not found");
+        throw new Exception("Vault not Found");
       }
       if (!vault.IsPublished && vault.creatorId != userId )
       {
-        throw new Exception("Unauthorized Action");
+        throw new Exception("This Vault is Private");
       }
       return vault;
     }
@@ -75,9 +76,9 @@ namespace amazen_server.Services
 
    
 
-    internal Vault  GetProfileVaults(string id1, string id2)
+    internal IEnumerable<Vault> GetVaultsByProfile(string pId, string uId)
     {
-      throw new NotImplementedException();
+      return _repo.GetVaultsByProfile(pId).ToList().FindAll(v => v.creatorId == uId || v.IsPublished);
     }
   }
 }

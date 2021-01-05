@@ -62,7 +62,7 @@ namespace amazen_server.Services
 
     internal IEnumerable<Keep> GetKeepsByProfile(string pId, string uId)
     {
-      return _repo.GetKeepsByProfile(pId).ToList().FindAll(k => k.creatorId == uId || !k.IsPrivate);
+      return _repo.GetKeepsByProfile(pId).ToList().FindAll(k => k.creatorId == uId || !k.isPrivate);
     }
   }
 }

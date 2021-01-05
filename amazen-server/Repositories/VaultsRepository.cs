@@ -57,9 +57,15 @@ namespace amazen_server.Services
 
     internal IEnumerable<Vault> GetVaultsByProfile(string profileId)
     {
-      string sql = "SELECT * FROM vaults WHERE " + "'" + profileId + "'" + " = creatorId";
-      return (List<Vault>)_db.Query(sql, new { profileId });
-      throw new NotImplementedException();
+      string sql = @"SELECT vault.*, p.* FROM vaults vault JOIN profiles p ON vault.creatorId = p.id WHERE vault.creatorId = @profileId";
+      return _db.Query<Vault, Profile, Vault>(sql, (vault, profile) => { vault.Creator = profile; return vault; }, new { profileId }, splitOn: "id");
     }
+    // internal IEnumerable<Vault> GetUserVaults(string userId)
+    // {
+    //   string sql = "SELECT * FROM vaults WHERE creatorId = @userId";
+    //   return (IEnumerable<Vault>)_db.Query(sql, new { userId });
+    //   throw new NotImplementedException();
+    // }
+
   }
 }

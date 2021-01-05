@@ -15,28 +15,28 @@ namespace amazen_server.Controllers
   public class VaultsController : ControllerBase
   {
     private readonly VaultsService _vs;
-    // private readonly VaultKeepsService _vks; VaultKeepsService vks
+    private readonly VaultkeepsService _vks;
 
-    public VaultsController(VaultsService vs)
+    public VaultsController(VaultsService vs, VaultkeepsService vks)
     {
       _vs = vs;
-      // _vks = vks;
+      _vks = vks;
     }
 
-    [HttpGet]
-    [Authorize]
-    public ActionResult<IEnumerable<Vault>> Get()
-    {
-      try
-      {
-        return Ok(_vs.Get());
-      }
-      catch (System.Exception e)
-      {
+    // [HttpGet]
+    // [Authorize]
+    // public ActionResult<IEnumerable<Vault>> Get()
+    // {
+    //   try
+    //   {
+    //     return Ok(_vs.Get());
+    //   }
+    //   catch (System.Exception e)
+    //   {
 
-        return BadRequest(e.Message);
-      }
-    }
+    //     return BadRequest(e.Message);
+    //   }
+    // }
     [HttpGet("{id}")]
     public async Task<ActionResult<Vault>> GetOne(int id)
     {
@@ -53,14 +53,14 @@ namespace amazen_server.Controllers
       }
     }
 
-    [HttpGet("{vaultId}/vaultkeeps")]
+    [HttpGet("{vaultId}/keeps")]
     [Authorize]
     public ActionResult<IEnumerable<Keep>> Get(int vaultId)
     {
       try
       {
-        // return Ok(_vks.GetKeepsByVaultId(vaultId))
-        return null;
+        return Ok(_vks.GetKeepsByVaultId(vaultId));
+        // return null;
       }
       catch (System.Exception e)
       {
@@ -118,10 +118,7 @@ namespace amazen_server.Controllers
 
         return BadRequest(e.Message);
       }
+
     }
-
-
-
   }
-
 }

@@ -38,13 +38,30 @@
 --   REFERENCES profiles(id)
 --   ON DELETE CASCADE
 -- )
+ALTER TABLE vaultkeeps
+
 
 -- ALTER TABLE  keeps
 -- DROP COLUMN keeps,
 -- ADD COLUMN keepCount int NOT NULL
 
-ALTER TABLE keeps
+-- ALTER TABLE keeps
 -- ADD COLUMN isPrivate TINYINT
 -- MODIFY COLUMN description VARCHAR(955)
-MODIFY COLUMN keepCount int DEFAULT 0
+-- MODIFY COLUMN keepCount int DEFAULT 0
+-- DROP COLUMN isPrivate
+-- MODIFY COLUMN views int DEFAULT 0
+-- MODIFY COLUMN shares int DEFAULT 0
+-- MODIFY COLUMN image VARCHAR(255)
+-- DROP COLUMN keepCount
+-- CHANGE COLUMN image img VARCHAR(255) not NULL
+-- ADD COLUMN isPrivate TINYINT DEFAULT 0
+-- DROP COLUMN keepCount
+-- ADD COLUMN keeps int DEFAULT 0
+--  drop TABLE keeps
+
+-- ALTER TABLE keeps
+-- RENAME TO keepstable
+
+
 
