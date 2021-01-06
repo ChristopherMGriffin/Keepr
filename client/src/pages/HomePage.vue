@@ -58,9 +58,9 @@ export default {
 
 @media (min-width: 75em) {
     .card-columns {
-        -webkit-column-count: 5;
-        -moz-column-count: 5;
-        column-count: 5;
+        -webkit-column-count: 4;
+        -moz-column-count: 4;
+        column-count: 4;
     }
 }
 

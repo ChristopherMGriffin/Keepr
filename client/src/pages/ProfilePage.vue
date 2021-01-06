@@ -2,16 +2,16 @@
   <div class="Profile container-fluid p-5">
     <div class="row">
       <div class="col-4">
-        <img class="img-thumbnail rounded pic" :src="profile.picture" alt="">
+        <img class="img-thumbnail rounded pic" :src="activeProfile.picture" alt="">
       </div>
       <div class="col-7">
         <div class="row">
-          <h1>{{ profile.name }}</h1>
+          <h1>{{ activeProfile.name }}</h1>
           <div class="col-12">
             <h2>Vaults:  {{ profileVaults.length }}</h2>
           </div>
           <div class="col-12">
-            <h2>Keeps:  {{ keeps.length }}</h2>
+            <h2>Keeps:  {{ profileKeeps.length }}</h2>
           </div>
         </div>
       </div>
@@ -19,7 +19,7 @@
     <div class="row mt-5">
       <h1 class="subheader ml-4">
         Vaults
-      </h1><button class="btn btn-sm btn-link">
+      </h1><button v-if="user.id = activeProfile.id" class="btn btn-sm btn-link">
         <h1>+</h1>
       </button>
     </div>
@@ -29,11 +29,11 @@
     <div class="row mt-5">
       <h1 class="subheader ml-4">
         Keeps
-      </h1><button class="btn btn-sm btn-link">
+      </h1><button v-if="user.id = activeProfile.id " class="btn btn-sm btn-link">
         <h1>+</h1>
       </button>
       <div class="card-columns p-3">
-        <Keep v-for="keep in keeps" :key="keep.id" :kprops="keep" />
+        <ProfileKeep v-for="k in profileKeeps" :key="k.id" :kprops="k" />
       </div>
     </div>
   </div>
@@ -59,8 +59,9 @@ export default {
       logger.log('params', route.params.profileId)
     })
     return {
-      profile: computed(() => AppState.activeProfile),
-      keeps: computed(() => AppState.profileKeeps),
+      user: computed(() => AppState.user),
+      activeProfile: computed(() => AppState.activeProfile),
+      profileKeeps: computed(() => AppState.profileKeeps),
       profileVaults: computed(() => AppState.profileVaults)
 
     }

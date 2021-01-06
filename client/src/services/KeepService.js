@@ -1,7 +1,7 @@
 import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
 import { AppState } from '../AppState'
-
+// import { swal } from 'sweetalert'
 class KeepService {
   async create(newKeep) {
     try {
@@ -15,6 +15,7 @@ class KeepService {
 
   async deleteKeep(id) {
     try {
+      window.confirm('Are you sure?')
       const res = await api.delete('api/keeps/' + id)
       logger.log(res)
       this.getAll()
