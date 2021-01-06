@@ -11,14 +11,13 @@
       </div>
     </div>
     <div class="card-columns p-0">
-      <Keep v-for="vk in activeVaultKeeps" :key="vk.id" :vkprops="vk" :vprops="activeVault" />
+      <VaultKeepComponent v-for="vk in activeVaultKeeps" :key="vk.id" :vkprops="vk" :vprops="activeVault" />
     </div>
   </div>
 </template>
 
 <script>
-// import VaultKeepComponent from '../components/VaultKeepComponent'
-import Keep from '../components/KeepComponent'
+import VaultKeepComponent from '../components/VaultKeep'
 import { computed, onMounted } from 'vue'
 import { AppState } from '../AppState'
 import { vaultService } from '../services/VaultsService'
@@ -26,7 +25,7 @@ import { useRoute } from 'vue-router'
 export default {
   name: 'ActiveVaultPage',
   props: ['kprops'],
-  components: { Keep },
+  components: { VaultKeepComponent },
   setup(props) {
     const route = useRoute()
     onMounted(() => {

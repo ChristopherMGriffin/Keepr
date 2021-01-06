@@ -1,5 +1,5 @@
 <template>
-  <div class="VaultKeepComponent card mt-2 p-0">
+  <div class="VaultKeep card mt-2 p-0">
     <div class="container p-0">
       <div>
         <img
@@ -16,8 +16,17 @@
             </p>
           </a>
           <router-link :to="{ name: 'Profile', params: { profileId: kprops.creatorId} }">
-            <i class="ml-5 fa fa-user-circle bottom-right" aria-hidden="true"></i>
+            <!-- <i class="ml-5 fa fa-user-circle bottom-right" aria-hidden="true"></i> -->
+            <img
+              :src="kprops.creator.picture"
+              alt="user photo"
+              height="15"
+              class="rounded bottom-right"
+            />
           </router-link>
+          <p id="name" class="bottomer">
+            {{ kprops.creator.name }}
+          </p>
         </div>
       </div>
       <div :id="'modelId' + kprops.id"
@@ -116,11 +125,10 @@
                             <button id="vaultdoor"
                                     type="button"
                                     class="ml-0 btn border rounded dropdown-toggle"
-                                    data-toggle="dropdown"
                                     aria-haspopup="true"
                                     aria-expanded="false"
                             >
-                              Add To Vault
+                              Remove from Vault
                             </button>
                             <div class="dropdown-menu">
                               <ul class="row p-0 m-0">
@@ -159,21 +167,22 @@
     </div>
   </div>
 </template>
-
 <script>
 import { computed, reactive } from 'vue'
 import { keepService } from '../services/KeepService'
 import { AppState } from '../AppState'
 import VaultMenuComponent from './VaultMenuComponent.vue'
 export default {
-  name: 'VaultKeepComponent',
-  props: ['vkprops'],
+  name: 'VaultKeep',
+  props: ['kprops', 'vprops'],
   setup(props) {
     const state = reactive({
       editedKeep: {}
     })
     return {
       state,
+      vaultKeeps: computed(() => AppState.vaultKeeps),
+      activeVault: computed(() => AppState.activeVault),
       profileVaults: computed(() => AppState.profileVaults),
       user: computed(() => AppState.user),
       profile: computed(() => AppState.profile),
@@ -194,6 +203,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 #modal-image {
   max-width: 20em;
   max-height: 30em;
@@ -207,7 +217,8 @@ i:hover {
 }
 
 .clr {
-  color:#55efc4;
+  color:#55efc4 ;
+
 }
 #modal-description {
   max-height: 15em;
@@ -236,3 +247,16 @@ ul {
   position: absolute;
   bottom: 5px;
 }
+.bottomer {
+  position: absolute;
+  bottom: -14px;
+  right: 5px;
+}
+ #name {
+   font-size: 9px;
+}
+.bottom-right:hover {
+  transform: scale(3);
+}
+
+</style>

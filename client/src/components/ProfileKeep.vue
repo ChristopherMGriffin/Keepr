@@ -1,5 +1,5 @@
 <template>
-  <div class="keep card mt-2 p-0">
+  <div class="ProfileKeep card mt-2 p-0">
     <div class="container p-0">
       <div>
         <img
@@ -27,6 +27,7 @@
           <p id="name" class="bottomer">
             {{ kprops.creator.name }}
           </p>
+          </router-link>
         </div>
       </div>
       <div :id="'modelId' + kprops.id"
@@ -168,14 +169,13 @@
     </div>
   </div>
 </template>
-
 <script>
 import { computed, reactive } from 'vue'
 import { keepService } from '../services/KeepService'
 import { AppState } from '../AppState'
 import VaultMenuComponent from './VaultMenuComponent.vue'
 export default {
-  name: 'Keep',
+  name: 'ProfileKeep',
   props: ['kprops'],
   setup(props) {
     const state = reactive({
@@ -240,9 +240,8 @@ ul {
 }
 .bottom-right {
   position: absolute;
-  bottom: 13px;
+  bottom: 8px;
   right: 8px;
-  font-size: 7;
 }
 #card-bottom {
   position: absolute;
