@@ -17,6 +17,7 @@
     "popper.js": "^1.16.1",
     "vue": "^3.0.0-0",
     "vue-masonry": "^0.12.0",
+    "vue-no-ssr": "^1.1.1",
     "vue-router": "^4.0.0-0",
     "vuetify": "^2.4.0"
   },

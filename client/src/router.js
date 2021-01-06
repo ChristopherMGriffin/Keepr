@@ -31,7 +31,7 @@ const routes = [
     component: loadPage('ActiveKeepPage')
   },
   {
-    path: '/profile',
+    path: '/profile/:profileId',
     name: 'Profile',
     component: loadPage('ProfilePage'),
     beforeEnter: authGuard

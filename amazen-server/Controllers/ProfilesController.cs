@@ -41,11 +41,11 @@ namespace amazen_server.Controllers
     }
     [HttpGet("{id}")]
     // [Authorize]
-    public ActionResult<Profile> GetOneProfile()
+    public ActionResult<Profile> GetOneProfile(string id)
     {
       try
       {
-        return Ok(_ps.GetAllProfiles());
+        return Ok(_ps.GetOneProfile(id));
       }
       catch (System.Exception e)
       {

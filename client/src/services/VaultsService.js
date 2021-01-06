@@ -22,13 +22,34 @@ class VaultService {
     }
   }
 
-  async addToVault(vId, kId) {
+  async getOne(id) {
+    try {
+      const res = await api.get('api/vaults/' + id)
+      this.getVaultKeeps(id)
+      AppState.activeVault = res.data
+      logger.log('getOneVault', AppState.activeVault)
+    } catch (e) {
+      logger.log(e)
+    }
+  }
+
+  async getVaultKeeps(id) {
+    try {
+      const res = await api.get('api/vaults/' + id + '/keeps')
+      AppState.activeVaultKeeps = res.data
+      logger.log('getvaultkeeps', AppState.activeVaultKeeps)
+    } catch (e) {
+      logger.log(e)
+    }
+  }
+
+  async addToVault(vId) {
     try {
       const newVk = {
         VaultId: vId,
-        KeepId: kId
+        KeepId: AppState.activeKeep.id
       }
-      const res = await api.post('api/vaultproducts', newVk)
+      const res = await api.post('api/vaultkeeps', newVk)
       logger.log('w.s.', res.data)
     } catch (e) {
       logger.log(e)

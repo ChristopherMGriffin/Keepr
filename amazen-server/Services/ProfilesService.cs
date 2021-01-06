@@ -24,9 +24,9 @@ namespace amazen_server.Services
       return foundProfile;
     }
 
-    public IEnumerable<Profile> GetAllProfiles()
+    public Profile GetOneProfile(string id)
     {
-      return _repo.GetAllProfiles();
+      return _repo.GetOneProfile(id);
     }
   }
 }

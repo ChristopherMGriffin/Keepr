@@ -1,8 +1,8 @@
 <template>
-  <nav class="navbar sticky p-0 d-flex justify-content-between">
-    <div class="col-2 col-sm-1 mr-4">
-      <router-link class="navbar-brand" :to="{ name: 'Home' }">
-        <div class="d-flex flex-column align-items-center">
+  <nav class="navbar sticky p-0">
+    <div class="col-sm-1 col-md-2 mr-4">
+      <router-link class="navbar-brand" :to="{ path: '/' }">
+        <div class="d-flex flex-column align-items-center m-0 p-0">
           <img
             alt="logo"
             src="../assets/img/klogo.png"
@@ -11,33 +11,32 @@
         </div>
       </router-link>
     </div>
-    <div class="col-sm-5 col-md-6 d-flex align-items-center">
+    <div class="col-md-7 col-sm-3 col-xs-2 d-flex align-items-center">
       <div class="input-group mt-2">
         <!-- <div class="input-group-prepend">
               <span class="input-group-text" id="inputGroup-sizing-default">Default</span>
             </div> -->
+        <!-- <input type="text" class="form-control-sm mb-2" aria-label="Default" aria-describedby="inputGroup-sizing-default"> -->
         <input type="text" class="form-control mb-2" aria-label="Default" aria-describedby="inputGroup-sizing-default">
       </div>
     </div>
     <div class="col-sm-1 col-md-2 p d-flex justify-content-end">
       <button
-        class="btn btn-outline-primary text-uppercase"
+        class="btn text-uppercase"
         @click="login"
         v-if="!user.isAuthenticated"
       >
-        Log in
       </button>
-      <button
-        class="btn btn-outline-primary text-uppercase"
-        @click="logout"
-        v-if="user.isAuthenticated"
-      >
-        Log out
-      </button>
-      <!-- <button @click="logout" v-else class="p-0 btn-bg border-light rounded text-light btn-block btn-sm">
-        Log Out
-      </button> -->
+      <div class="btn-group open">
+        <a class="btn dropdown-toggle" type="button" data-toggle="dropdown"><i id="user-icon" class="fa fa-user-circle-o fa-2x"></i></a>
+        <ul class="dropdown-menu dropdown-menu-right p-3">
+          <li><a href="#"><i class="fa fa-user-o"></i>    Profile</a></li>
+          <li><a href="#"><i class="fa fa-sign-out"></i> Log Out</a></li>
+          <li class="divider"></li>
+        </ul>
+      </div>
     </div>
+
     <!--
 
     <button
@@ -125,6 +124,7 @@ export default {
       async login() {
         AuthService.loginWithPopup()
       },
+
       async logout() {
         await AuthService.logout({ returnTo: window.location.origin })
       }

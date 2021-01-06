@@ -1,5 +1,5 @@
 <template>
-  <div class="keep card mt-2 p-0">
+  <div class="VaultKeepComponent card mt-2 p-0">
     <div class="container p-0">
       <div>
         <img
@@ -166,8 +166,8 @@ import { keepService } from '../services/KeepService'
 import { AppState } from '../AppState'
 import VaultMenuComponent from './VaultMenuComponent.vue'
 export default {
-  name: 'Keep',
-  props: ['kprops'],
+  name: 'VaultKeepComponent',
+  props: ['vkprops'],
   setup(props) {
     const state = reactive({
       editedKeep: {}
@@ -207,8 +207,7 @@ i:hover {
 }
 
 .clr {
-  color:#55efc4 ;
-
+  color:#55efc4;
 }
 #modal-description {
   max-height: 15em;
@@ -237,5 +236,3 @@ ul {
   position: absolute;
   bottom: 5px;
 }
-
-</style>

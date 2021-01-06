@@ -7,21 +7,42 @@ class ProfileService {
     try {
       const res = await api.get('api/profile')
       AppState.profile = res.data
-      this.getProfileVaults()
+      this.getProfileVaults(AppState.profile.id)
+      logger.log(AppState.P)
     } catch (err) {
       logger.error('HAVE YOU STARTED YOUR SERVER YET???', err)
     }
   }
 
-  async getProfileVaults() {
+  async getOneProfile(id) {
     try {
-      var id = AppState.profile.id
+      const res = await api.get('api/profile/' + id)
+      AppState.activeProfile = res.data
+      logger.log('activeProfile', AppState.activeProfile)
+    } catch (e) {
+      logger.log(e)
+    }
+  }
+
+  async getProfileVaults(id) {
+    try {
       logger.log('profileId', id)
       const res = await api.get('api/profile/' + id + '/vaults')
-      AppState.profile = res.data
-      logger.log('profserv', AppState.vaults)
+      AppState.profileVaults = res.data
+      logger.log('profileVaults', AppState.profileVaults)
     } catch (e) {
       logger.log('Profile Service', e)
+    }
+  }
+
+  async getProfileKeeps(id) {
+    try {
+      logger.log('profile Keeps', id)
+      const res = await api.get('api/profile/' + id + '/keeps')
+      AppState.profileKeeps = res.data
+      logger.log('profile Keeps', id, res.data)
+    } catch (e) {
+      logger.log(e)
     }
   }
 }
