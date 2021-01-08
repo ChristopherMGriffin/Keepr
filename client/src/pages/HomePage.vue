@@ -1,7 +1,7 @@
 <template>
   <div class="home flex-grow-1 d-flex align-items-center container-fluid">
     <div class="card-columns p-3">
-      <Keep v-for="keep in keeps" :key="keep.id" :kprops="keep" />
+      <Keep v-for="keep in publicKeeps" :key="keep.id" :kprops="keep" />
     </div>
   </div>
 </template>
@@ -10,16 +10,18 @@
 import { keepService } from '../services/KeepService'
 import { computed, onMounted } from 'vue'
 import { AppState } from '../AppState'
+import { logger } from '../utils/Logger'
 export default {
   name: 'Home',
   props: ['kprops'],
   setup(props) {
     onMounted(() => {
+      logger.log('onMount Home Page')
       keepService.getAll()
     })
     return {
       profile: computed(() => AppState.profile),
-      keeps: computed(() => AppState.keeps)
+      publicKeeps: computed(() => AppState.publicKeeps)
 
     }
   }

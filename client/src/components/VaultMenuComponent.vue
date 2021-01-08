@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, reactive } from 'vue'
 import { vaultService } from '../services/VaultsService'
 import { logger } from '../utils/Logger'
 import { AppState } from '../AppState'
@@ -22,12 +22,17 @@ export default {
   name: 'VaultMenuComponent',
   props: ['vprops', 'kprops'],
   setup(props) {
+    const state = reactive({
+      newVk: {}
+    })
     return {
+      state,
       profileVaults: computed(() => AppState.profileVaults),
-      activeProduct: computed(() => AppState.activeProduct),
+      activeVault: computed(() => AppState.activeVault),
+
       addToVault(vId) {
         logger.log('vid', vId)
-        vaultService.addToVault(vId)
+        vaultService.createVaultKeep(vId)
       }
     }
   },

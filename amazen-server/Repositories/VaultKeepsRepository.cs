@@ -43,7 +43,7 @@ namespace amazen_server.Repositories
 
     internal bool Delete(int kvId, int kId)
     {
-      string sql1 = "UPDATE keepstable SET keeps = keeps - 1 WHERE @kId = id";
+      string sql1 = "UPDATE keepstable SET keeps = keeps - 1 WHERE id = @kid";
       _db.Execute(sql1, new { kId });
       string sql = "DELETE from vaultkeeps WHERE id = @kvId";
       int valid = _db.Execute(sql, new { kvId });

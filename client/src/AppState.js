@@ -3,13 +3,14 @@ import { reactive } from 'vue'
 // NOTE AppState is a reactive object to contain app level data
 export const AppState = reactive({
   user: {},
-  profile: {},
-  keeps: [],
-  vaults: [],
+  userProfile: {},
+  publicKeeps: [],
   activeKeep: {},
   activeVault: {},
-  profileKeeps: [],
-  profileVaults: [],
+  userKeeps: [],
+  userVaults: [],
   activeProfile: {},
+  activeProfileVaults: [],
+  activeProfileKeeps: [],
   activeVaultKeeps: []
 })

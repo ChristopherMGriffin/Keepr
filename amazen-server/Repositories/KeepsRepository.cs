@@ -21,7 +21,8 @@ namespace amazen_server.Repositories
       INSERT INTO keepstable
       (name, description, img, creatorId)
       VALUES
-      (@Name, @Description, @Img, @CreatorId)";
+      (@Name, @Description, @Img, @CreatorId);
+       SELECT LAST_INSERT_ID();";
       return _db.ExecuteScalar<int>(sql, newKeep);
     }
     public IEnumerable<Keep> Get()

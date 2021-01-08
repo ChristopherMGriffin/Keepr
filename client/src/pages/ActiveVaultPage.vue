@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="card-columns p-0">
-      <VaultKeepComponent v-for="vk in activeVaultKeeps" :key="vk.id" :vkprops="vk" :vprops="activeVault" />
+      <VaultKeepComponent v-for="vk in activeVaultKeeps" :key="vk.id" :vkprops="vk" />
     </div>
   </div>
 </template>
@@ -33,8 +33,7 @@ export default {
       vaultService.getVaultKeeps(route.params.vaultId)
     })
     return {
-      user: computed(() => AppState.user),
-      profile: computed(() => AppState.activeProfile),
+      userProfile: computed(() => AppState.user),
       activeVaultKeeps: computed(() => AppState.activeVaultKeeps),
       activeVault: computed(() => AppState.activeVault)
     }

@@ -15,7 +15,7 @@
               {{ kprops.name }}
             </p>
           </a>
-          <router-link :to="{ name: 'Profile', params: { profileId: kprops.creatorId} }">
+           <router-link :to="{ name: 'Profile', params: { profileId: kprops.creatorId} }">
             <!-- <i class="ml-5 fa fa-user-circle bottom-right" aria-hidden="true"></i> -->
             <img
               :src="kprops.creator.picture"
@@ -138,7 +138,7 @@
                                     Create New
                                   </button>
                                 </li>
-                                <VaultMenuComponent v-for="v in profileVaults" :key="v.id" :vprops="v" />
+                                <VaultMenuComponent v-for="v in userVaults" :key="v.id" :vprops="v" />
                               </ul>
                             </div>
                           </div>
@@ -174,9 +174,10 @@ import { computed, reactive } from 'vue'
 import { keepService } from '../services/KeepService'
 import { AppState } from '../AppState'
 import VaultMenuComponent from './VaultMenuComponent.vue'
+import { profileService } from '../services/ProfileService'
 export default {
   name: 'Keep',
-  props: ['kprops'],
+  props: ['kprops', 'vprops'],
   setup(props) {
     const state = reactive({
       editedKeep: {}
@@ -185,8 +186,9 @@ export default {
       state,
       profileVaults: computed(() => AppState.profileVaults),
       user: computed(() => AppState.user),
-      profile: computed(() => AppState.profile),
+      userProfile: computed(() => AppState.userProfile),
       activeKeep: computed(() => AppState.activeKeep),
+      userVaults: computed(() => AppState.userVaults),
       deleteKeep(id) {
         keepService.deleteKeep(id)
       },
@@ -195,6 +197,9 @@ export default {
       },
       getOne(id) {
         keepService.getOne(id)
+      },
+      getActiveProfile(id) {
+        profileService.getOneProfile(id)
       }
     }
   },

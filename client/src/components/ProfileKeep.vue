@@ -10,13 +10,13 @@
         >
         <div class="ml-0 mb-0 p-0 text-white card-img-overlay h-100 d-flex flex-column justify-content-end">
           <a href="#" @click="getOne(kprops.id)" class="text-white text-left" data-toggle="modal" :data-target="'#modelId' + kprops.id">
-
             <p class="align-self-start mb-1 ml-1">
               {{ kprops.name }}
             </p>
           </a>
+          <i v-if="userProfile.id == kprops.creatorId" aria-hidden="true" data-dismiss="modal" @click="deleteKeep(kprops.id)" class="fas fa-trash top-left   "></i>
           <router-link :to="{ name: 'Profile', params: { profileId: kprops.creatorId} }">
-            <!-- <i class="ml-5 fa fa-user-circle bottom-right" aria-hidden="true"></i> -->
+            <i class="ml-5 fa fa-user-circle bottom-right" aria-hidden="true"></i>
             <img
               :src="kprops.creator.picture"
               alt="user photo"
@@ -24,10 +24,11 @@
               class="rounded bottom-right"
             />
           </router-link>
+          <p>profileKeeps</p>
           <p id="name" class="bottomer">
             {{ kprops.creator.name }}
           </p>
-          </router-link>
+          <!-- </router-link> -->
         </div>
       </div>
       <div :id="'modelId' + kprops.id"
@@ -146,7 +147,7 @@
                         </div>
                       </div>
                       <div class="col pt-2">
-                        <i v-if="user.id == kprops.creatorId" id="trash" class="fas fa-trash fa-lg"></i>
+                        <i id="trash" class="fas fa-trash fa-lg"></i>
                       </div>
                       <div class="col">
                         <span>
@@ -184,8 +185,8 @@ export default {
     return {
       state,
       profileVaults: computed(() => AppState.profileVaults),
-      user: computed(() => AppState.user),
-      profile: computed(() => AppState.profile),
+      userProfile: computed(() => AppState.userProfile),
+      activeProfile: computed(() => AppState.activeProfile),
       activeKeep: computed(() => AppState.activeKeep),
       deleteKeep(id) {
         keepService.deleteKeep(id)
@@ -257,6 +258,11 @@ ul {
 }
 .bottom-right:hover {
   transform: scale(3);
+}
+.top-left {
+  position: absolute;
+  top: 5px;
+  left: 5px
 }
 
 </style>

@@ -22,16 +22,19 @@
     </div>
     <div class="col-sm-1 col-md-2 p d-flex justify-content-end">
       <button
-        class="btn text-uppercase"
+        class="btn text-uppercase border-dark"
         @click="login"
         v-if="!user.isAuthenticated"
       >
+        Log In
       </button>
-      <div class="btn-group open">
+      <div class="btn-group open" v-if="user.isAuthenticated">
         <a class="btn dropdown-toggle" type="button" data-toggle="dropdown"><i id="user-icon" class="fa fa-user-circle-o fa-2x"></i></a>
         <ul class="dropdown-menu dropdown-menu-right p-3">
-          <li><a href="#"><i class="fa fa-user-o"></i>    Profile</a></li>
-          <li><a href="#"><i class="fa fa-sign-out"></i> Log Out</a></li>
+          <!-- <router-link @click="getActiveProfile(route.params.id)" :to="{ name: 'Profile', params: { profileId: AppState.profile.id} }"> -->
+            <li><a href="#"><i class="fa fa-user-o"></i>    Profile</a></li>
+          <!-- </router-link> -->
+          <li><a @click="logout" href="#"><i class="fa fa-sign-out"></i> Log Out</a></li>
           <li class="divider"></li>
         </ul>
       </div>
@@ -156,6 +159,6 @@ a:hover {
   color: var(--primary);
 }
 .navbar {
-  background-color:#55efc4 ;
+  background-color:#97bdb2 ;
 }
 </style>

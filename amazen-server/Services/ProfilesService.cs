@@ -16,7 +16,7 @@ namespace amazen_server.Services
   
     public Profile GetOrCreateProfile(Profile userInfo)
     {
-      Profile foundProfile = _repo.GetByEmail(userInfo.Email);
+      Profile foundProfile = _repo.GetOneProfile(userInfo.Id);
       if (foundProfile == null)
       {
         return _repo.Create(userInfo);

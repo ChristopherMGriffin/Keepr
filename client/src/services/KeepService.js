@@ -1,13 +1,18 @@
 import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
 import { AppState } from '../AppState'
+import { profileService } from './ProfileService'
 // import { swal } from 'sweetalert'
 class KeepService {
-  async create(newKeep) {
+  async createKeep(newKeep) {
     try {
       const res = await api.post('api/keeps', newKeep)
       logger.log(res.data)
-      this.getAll()
+      if (newKeep.corn === AppState.user.id) {
+        profileService.getUserKeeps(newKeep.corn)
+        profileService.getProfileKeeps(newKeep.corn)
+      }
+      profileService.getProfileKeeps(newKeep.corn)
     } catch (e) {
       logger.log(e)
     }
@@ -15,8 +20,9 @@ class KeepService {
 
   async deleteKeep(id) {
     try {
-      window.confirm('Are you sure?')
+      window.confirm('Verify Delete For Keep ' + id + '?')
       const res = await api.delete('api/keeps/' + id)
+      profileService.getProfileKeeps(AppState.activeProfile.id)
       logger.log(res)
       this.getAll()
     } catch (e) {
@@ -27,8 +33,8 @@ class KeepService {
   async getAll() {
     try {
       const res = await api.get('api/keeps')
-      AppState.keeps = res.data
-      logger.log('keeps', AppState.keeps)
+      AppState.publicKeeps = res.data
+      logger.log('publicKeeps on mount home page', AppState.publicKeeps)
     } catch (e) {
       logger.log(e)
     }
@@ -38,7 +44,7 @@ class KeepService {
     try {
       const res = await api.get('api/keeps/' + id)
       AppState.activeKeep = res.data
-      logger.log(AppState.activeKeep)
+      logger.log('activeKeep', AppState.activeKeep)
     } catch (e) {
       logger.log(e)
     }

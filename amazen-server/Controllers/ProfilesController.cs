@@ -10,13 +10,13 @@ namespace amazen_server.Controllers
 {
   [ApiController]
   [Route("api/[controller]")]
-  public class ProfileController : ControllerBase
+  public class ProfilesController : ControllerBase
   {
     private readonly ProfilesService _ps;
     private readonly KeepsService _ks;
     private readonly VaultsService _vs;
 
-    public ProfileController(ProfilesService ps, KeepsService ks, VaultsService vs)
+    public ProfilesController(ProfilesService ps, KeepsService ks, VaultsService vs)
     {
       _ps = ps;
       _ks = ks;
@@ -59,7 +59,7 @@ namespace amazen_server.Controllers
       try
       {
         Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
-        return Ok(_ks.GetKeepsByProfile(id, userInfo.Id));
+        return Ok(_ks.GetKeepsByProfile(id, userInfo?.Id));
       }
       catch (System.Exception e)
       {
@@ -75,7 +75,7 @@ namespace amazen_server.Controllers
       try
       {
         Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
-        return Ok(_vs.GetVaultsByProfile(id, userInfo.Id));
+        return Ok(_vs.GetVaultsByProfile(id, userInfo?.Id));
       }
       catch (System.Exception e)
       {
