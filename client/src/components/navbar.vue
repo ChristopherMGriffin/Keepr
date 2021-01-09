@@ -24,7 +24,6 @@
       <button
         class="btn text-uppercase border-dark"
         @click="login"
-        v-if="!user.isAuthenticated"
       >
         Log In
       </button>
@@ -32,7 +31,7 @@
         <a class="btn dropdown-toggle" type="button" data-toggle="dropdown"><i id="user-icon" class="fa fa-user-circle-o fa-2x"></i></a>
         <ul class="dropdown-menu dropdown-menu-right p-3">
           <!-- <router-link @click="getActiveProfile(route.params.id)" :to="{ name: 'Profile', params: { profileId: AppState.profile.id} }"> -->
-            <li><a href="#"><i class="fa fa-user-o"></i>    Profile</a></li>
+          <li><a href="#"><i class="fa fa-user-o"></i>    Profile</a></li>
           <!-- </router-link> -->
           <li><a @click="logout" href="#"><i class="fa fa-sign-out"></i> Log Out</a></li>
           <li class="divider"></li>

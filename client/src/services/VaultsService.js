@@ -14,7 +14,6 @@ class VaultService {
       }
 
       profileService.getProfileVaults(nv.corn)
-      // debugger
     } catch (e) {
       logger.log(e)
     }

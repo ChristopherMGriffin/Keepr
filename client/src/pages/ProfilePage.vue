@@ -39,24 +39,21 @@
           <div class="modal-body">
             <div class="form-group">
               <label for="" class="col-form-label">Title:</label>
-              <input type="text" class="form-control" v-model="state.newVault.name" placeholder="Title...">
+              <input type="text" class="form-control" name="inputfields" v-model="state.newVault.name" placeholder="Title...">
             </div>
             <div class="form-group">
               <label for="" class="col-form-label">Image Url</label>
-              <input type="text" class="form-control" placeholder="Url..." v-model="state.newVault.img">
+              <input type="text" class="form-control" name="inputfields" placeholder="Url..." v-model="state.newVault.img">
             </div>
             <div class="form-group">
               <label for="" class="col-form-label">Description</label>
-              <input type="text" class="form-control" placeholder="" v-model="state.newVault.description">
+              <input type="text" class="form-control" name="inputfields" placeholder="" v-model="state.newVault.description">
             </div>
             <div class="form-check-inline">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" v-model="state.newVault.isPublished">
-              <label for="" class="col-form-label">Private?</label>
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option2" v-model="state.newVault.isPublished">
+              <label for="" class="col-form-label">Save as Draft?</label>
             </div>
             <div>
-              <p id="small-print">
-                Private Vaults can only be seen by you.
-              </p>
             </div>
           </div>
           <div class="modal-footer">
@@ -76,44 +73,47 @@
          aria-labelledby="exampleModalCenterTitle"
          aria-hidden="true"
     >
-      <div class="modal-dialog modal-dialog-centered " role="document">
+      <div class="moderate modal-dialog modal-dialog-centered " role="document">
         <div class="modal-content modal-border">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">
-              New Keep
-            </h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span class="text-danger" aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="form-group">
-              <label for="" class="col-form-label">Title:</label>
-              <input type="text" class="form-control" v-model="state.newKeep.name" placeholder="Title...">
+          <form action="sumit" id="keepform" @submit.prevent="createKeep(state.newKeep)">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">
+                New Keep
+              </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span class="text-danger" aria-hidden="true">&times;</span>
+              </button>
             </div>
-            <div class="form-group">
-              <label for="" class="col-form-label">Image Url</label>
-              <input type="text" class="form-control" placeholder="Url..." v-model="state.newKeep.img">
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="" class="col-form-label">Title:</label>
+                <input type="text" class="form-control" name="inputfields" v-model="state.newKeep.name" placeholder="Title...">
+              </div>
+              <div class="form-group">
+                <label for="" class="col-form-label">Image Url</label>
+                <input type="text" class="form-control" name="inputfields" placeholder="Url..." v-model="state.newKeep.img">
+              </div>
+              <div class="form-group">
+                <label for="" class="col-form-label">Description</label>
+                <textarea v-model="state.newKeep.description" class="form-control" name="inputfields" cols="30" rows="6"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="" class="col-form-label">Tags:</label>
+                <input type="text" class="form-control" name="inputfields" v-model="state.newKeep.tags" placeholder="Tags...">
+              </div>
+              <div class="form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option2" v-model="state.newKeep.isPublished">
+                <label for="" class="col-form-label">Save as Draft?</label>
+              </div>
+              <div>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="" class="col-form-label">Description</label>
-              <textarea class="form-control" id="" cols="30" rows="6"></textarea>
+            <div class="modal-footer">
+              <button @click="createKeep(state.newKeep)" type="button" data-dismiss="modal" class="modal-create btn btn-primary">
+                Create Vault
+              </button>
             </div>
-            <div class="form-group">
-              <label for="" class="col-form-label">Tags:</label>
-              <input type="text" class="form-control" v-model="state.newKeep.tags" placeholder="Tags...">
-            </div>
-            <div>
-              <p id="small-print">
-                Private Vaults can only be seen by you.
-              </p>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button @click="createKeep(state.newKeep)" type="button" data-dismiss="modal" class="modal-create btn btn-primary">
-              Create Vault
-            </button>
-          </div>
+          </form>
         </div>
       </div>
     </div>
@@ -158,7 +158,6 @@ export default {
     const route = useRoute()
     const state = reactive({
       newVault: {
-        isPublished: true,
         corn: AppState.userProfile.id
       },
       newKeep: {
@@ -166,16 +165,9 @@ export default {
       }
     })
     onMounted(() => {
-      logger.log('profile page Mount')
-      if (AppState.userProfile.id === route.params.profileId) {
-        AppState.activeProfile = AppState.userProfile
-        AppState.activeProfileKeeps = AppState.userKeeps
-        AppState.activeProfileVaults = AppState.userVaults
-        logger.log('userprofile == route.params')
-        return
-      }
-      logger.log('userId != route.params')
       profileService.getOneProfile(route.params.profileId)
+      profileService.getProfileVaults(route.params.profileId)
+      profileService.getProfileKeeps(route.params.profileId)
     })
     return {
       state,
@@ -183,11 +175,18 @@ export default {
       activeProfile: computed(() => AppState.activeProfile),
       activeProfileKeeps: computed(() => AppState.activeProfileKeeps),
       activeProfileVaults: computed(() => AppState.activeProfileVaults),
-      createVault(nv) {
-        vaultService.createVault(nv)
+      createVault(newVault) {
+        if (!newVault.isPublished) {
+          newVault.isPublished = true
+        }
+        state.newVault = {
+          corn: AppState.userProfile.id
+        }
+        vaultService.createVault(newVault)
       },
-      createKeep(nk) {
-        keepService.createKeep(nk)
+      createKeep(newKeep) {
+        logger.log('nk', newKeep)
+        keepService.createKeep(newKeep)
       }
 
     }

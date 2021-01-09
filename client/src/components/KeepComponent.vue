@@ -15,7 +15,7 @@
               {{ kprops.name }}
             </p>
           </a>
-           <router-link :to="{ name: 'Profile', params: { profileId: kprops.creatorId} }">
+          <router-link :to="{ name: 'Profile', params: { profileId: kprops.creatorId} }">
             <!-- <i class="ml-5 fa fa-user-circle bottom-right" aria-hidden="true"></i> -->
             <img
               :src="kprops.creator.picture"
@@ -175,6 +175,8 @@ import { keepService } from '../services/KeepService'
 import { AppState } from '../AppState'
 import VaultMenuComponent from './VaultMenuComponent.vue'
 import { profileService } from '../services/ProfileService'
+import { logger } from '../utils/Logger'
+import { vaultService } from '../services/VaultsService'
 export default {
   name: 'Keep',
   props: ['kprops', 'vprops'],
@@ -200,6 +202,10 @@ export default {
       },
       getActiveProfile(id) {
         profileService.getOneProfile(id)
+      },
+      addToVault(vId) {
+        logger.log('vid', vId)
+        vaultService.createVaultKeep(vId)
       }
     }
   },

@@ -15,7 +15,7 @@
               {{ vkprops.name }}
             </p>
           </a>
-           <i v-if="userProfile.id == activeVault.creatorId" aria-hidden="true" data-dismiss="modal" @click="deleteVaultKeep(vkprops)" class="fas fa-trash top-left   "></i>
+          <i v-if="userProfile.id == activeVault.creatorId" aria-hidden="true" data-dismiss="modal" @click="deleteVaultKeep(vkprops)" class="fas fa-trash top-left   "></i>
           <router-link :to="{ name: 'Profile', params: { profileId: vkprops.creatorId} }">
             <!-- <i class="ml-5 fa fa-user-circle bottom-right" aria-hidden="true"></i> -->
             <img
@@ -124,7 +124,7 @@
                         <div>
                           <div class="btn-group btn-block dropup pl-0">
                             <button id="vaultdoor"
-                            @click="deleteVaultKeep(vkprops)"
+                                    @click="deleteVaultKeep(vkprops)"
                                     type="button"
                                     class="ml-0 btn border rounded dropdown-toggle"
                                     aria-haspopup="true"

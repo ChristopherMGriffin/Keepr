@@ -34,8 +34,8 @@ namespace amazen_server.Controllers
       }
     }
 
-    [Authorize]
     [HttpDelete("{id}")]
+    [Authorize]
     public async Task<ActionResult<string>> Delete(int id)
     {
       try

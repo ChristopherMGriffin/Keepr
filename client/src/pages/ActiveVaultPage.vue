@@ -2,7 +2,7 @@
   <div class="ActiveVaultPage mt-5 container">
     <div class="row">
       <div class="col-12">
-        <h1>{{ activeVault.name }}<i class="ml-3 fa fa-trash fa-xs" aria-hidden="true"></i></h1>
+        <h1>{{ activeVault.name }}<i class="ml-3 fa fa-trash fa-xs" @click="deleteVault(activeVault.id)" aria-hidden="true"></i></h1>
       </div>
     </div>
     <div class="row">
@@ -35,7 +35,10 @@ export default {
     return {
       userProfile: computed(() => AppState.user),
       activeVaultKeeps: computed(() => AppState.activeVaultKeeps),
-      activeVault: computed(() => AppState.activeVault)
+      activeVault: computed(() => AppState.activeVault),
+      deleteVault(id) {
+        vaultService.deleteVault(id)
+      }
     }
   }
 

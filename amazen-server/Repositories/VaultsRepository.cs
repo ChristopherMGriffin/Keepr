@@ -33,7 +33,9 @@ namespace amazen_server.Services
       INSERT INTO vaults
       (name, creatorId, isPublished, description)
       VALUES
-      (@Name, @CreatorId, @IsPublished, @Description);";
+      (@Name, @CreatorId, @IsPublished, @Description)
+      ;SELECT LAST_INSERT_ID()";
+      
       return _db.ExecuteScalar<int>(sql, newVault);
     }
 

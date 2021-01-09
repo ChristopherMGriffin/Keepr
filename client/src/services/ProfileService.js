@@ -20,9 +20,7 @@ class ProfileService {
       const res = await api.get('api/profiles/' + id)
       AppState.activeProfile = res.data
       logger.log('going to get profile keeps and vaults')
-      this.getProfileVaults(id)
-      this.getProfileKeeps(id)
-      logger.log('ps.getOneProfile appState.activeProfile, appstate.profile', AppState.activeProfile, AppState.profile)
+      logger.log('ps.getOneProfile appState.activeProfile, appstate.profile', AppState.activeProfile, AppState.userProfile)
     } catch (e) {
       logger.log(e)
     }
@@ -33,7 +31,7 @@ class ProfileService {
       logger.log('api/profiles/id/vaults profileId', id)
       const res = await api.get('api/profiles/' + id + '/vaults')
       AppState.userVaults = res.data
-      logger.log('res/api/profile/id/vaults  appState.userVaults', AppState.userVaults)
+      logger.log('uservaults', res.data)
     } catch (e) {
       logger.log('Profile Service', e)
     }

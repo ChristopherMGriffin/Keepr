@@ -1,5 +1,5 @@
 <template>
-  <div class="ProfileKeep card mt-2 p-0">
+  <div class="ThatOne card mt-2 p-0">
     <div class="container p-0">
       <div>
         <img
@@ -10,13 +10,13 @@
         >
         <div class="ml-0 mb-0 p-0 text-white card-img-overlay h-100 d-flex flex-column justify-content-end">
           <a href="#" @click="getOne(kprops.id)" class="text-white text-left" data-toggle="modal" :data-target="'#modelId' + kprops.id">
+
             <p class="align-self-start mb-1 ml-1">
               {{ kprops.name }}
             </p>
           </a>
-          <i v-if="userProfile.id == kprops.creatorId" aria-hidden="true" data-dismiss="modal" @click="deleteKeep(kprops.id)" class="fas fa-trash top-left   "></i>
           <router-link :to="{ name: 'Profile', params: { profileId: kprops.creatorId} }">
-            <i class="ml-5 fa fa-user-circle bottom-right" aria-hidden="true"></i>
+            <!-- <i class="ml-5 fa fa-user-circle bottom-right" aria-hidden="true"></i> -->
             <img
               :src="kprops.creator.picture"
               alt="user photo"
@@ -24,11 +24,9 @@
               class="rounded bottom-right"
             />
           </router-link>
-          <p>profileKeeps</p>
           <p id="name" class="bottomer">
             {{ kprops.creator.name }}
           </p>
-          <!-- </router-link> -->
         </div>
       </div>
       <div :id="'modelId' + kprops.id"
@@ -135,20 +133,19 @@
                             </button>
                             <div class="dropdown-menu">
                               <ul class="row p-0 m-0">
-                                <div v-for="v in profileVaults" :key="v.id" :vprops="v">
-                                  <li>
-                                    <button @click="addToVault(v.id)" class="btn btn-link">
-                                      {{ v.name }}
-                                    </button>
-                                  </li>
-                                </div>
+                                <li class="col-12">
+                                  <button type="button" class="btn btn-block btn-smbtn-link" data-toggle="modal" data-target="#modelId">
+                                    Create New
+                                  </button>
+                                </li>
+                                <VaultMenuComponent v-for="v in userVaults" :key="v.id" :vprops="v" />
                               </ul>
                             </div>
                           </div>
                         </div>
                       </div>
                       <div class="col pt-2">
-                        <i id="trash" class="fas fa-trash fa-lg"></i>
+                        <i v-if="user.id == kprops.creatorId" id="trash" class="fas fa-trash fa-lg"></i>
                       </div>
                       <div class="col">
                         <span>
@@ -171,14 +168,15 @@
     </div>
   </div>
 </template>
+
 <script>
 import { computed, reactive } from 'vue'
 import { keepService } from '../services/KeepService'
 import { AppState } from '../AppState'
-import { logger } from '../utils/Logger'
-import { vaultService } from '../services/VaultsService'
+import VaultMenuComponent from './VaultMenuComponent.vue'
+import { profileService } from '../services/ProfileService'
 export default {
-  name: 'ProfileKeep',
+  name: 'ThatOne',
   props: ['kprops', 'vprops'],
   setup(props) {
     const state = reactive({
@@ -186,10 +184,11 @@ export default {
     })
     return {
       state,
-      profileVaults: computed(() => AppState.activeProfileVaults),
+      profileVaults: computed(() => AppState.profileVaults),
+      user: computed(() => AppState.user),
       userProfile: computed(() => AppState.userProfile),
-      activeProfile: computed(() => AppState.activeProfile),
       activeKeep: computed(() => AppState.activeKeep),
+      userVaults: computed(() => AppState.userVaults),
       deleteKeep(id) {
         keepService.deleteKeep(id)
       },
@@ -199,13 +198,12 @@ export default {
       getOne(id) {
         keepService.getOne(id)
       },
-      addToVault(vId) {
-        logger.log('vid', vId)
-        vaultService.createVaultKeep(vId)
+      getActiveProfile(id) {
+        profileService.getOneProfile(id)
       }
     }
   },
-  components: {}
+  components: { VaultMenuComponent }
 }
 </script>
 
@@ -247,8 +245,9 @@ ul {
 }
 .bottom-right {
   position: absolute;
-  bottom: 8px;
+  bottom: 13px;
   right: 8px;
+  font-size: 7;
 }
 #card-bottom {
   position: absolute;
@@ -264,11 +263,6 @@ ul {
 }
 .bottom-right:hover {
   transform: scale(3);
-}
-.top-left {
-  position: absolute;
-  top: 5px;
-  left: 5px
 }
 
 </style>

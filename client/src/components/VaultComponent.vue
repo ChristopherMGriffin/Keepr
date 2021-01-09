@@ -13,6 +13,9 @@
         <h6 class="text-dark ml-5">
           {{ vprops.id }}
         </h6>
+        <h6 class="text-dark ">
+          Is Published:  {{ vprops.isPublished }}
+        </h6>
       </div>
     </div>
   </div>

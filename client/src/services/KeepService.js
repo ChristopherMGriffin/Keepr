@@ -7,7 +7,7 @@ class KeepService {
   async createKeep(newKeep) {
     try {
       const res = await api.post('api/keeps', newKeep)
-      logger.log(res.data)
+      logger.log(res.data, newKeep)
       if (newKeep.corn === AppState.user.id) {
         profileService.getUserKeeps(newKeep.corn)
         profileService.getProfileKeeps(newKeep.corn)
