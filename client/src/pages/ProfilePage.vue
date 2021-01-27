@@ -51,7 +51,7 @@
             </div>
             <div class="form-check-inline">
               <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option2" v-model="state.newVault.isPublished">
-              <label for="" class="col-form-label">Save as Draft?</label>
+              <label for="" class="col-form-label">Publish?</label>
             </div>
             <div>
             </div>
@@ -97,20 +97,20 @@
                 <label for="" class="col-form-label">Description</label>
                 <textarea v-model="state.newKeep.description" class="form-control" name="inputfields" cols="30" rows="6"></textarea>
               </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label for="" class="col-form-label">Tags:</label>
                 <input type="text" class="form-control" name="inputfields" v-model="state.newKeep.tags" placeholder="Tags...">
-              </div>
-              <div class="form-check-inline">
+              </div> -->
+              <!-- <div class="form-check-inline">
                 <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option2" v-model="state.newKeep.isPublished">
                 <label for="" class="col-form-label">Save as Draft?</label>
-              </div>
+              </div> -->
               <div>
               </div>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer py-1">
               <button @click="createKeep(state.newKeep)" type="button" data-dismiss="modal" class="modal-create btn btn-primary">
-                Create Vault
+                Create Keep
               </button>
             </div>
           </form>
@@ -176,9 +176,9 @@ export default {
       activeProfileKeeps: computed(() => AppState.activeProfileKeeps),
       activeProfileVaults: computed(() => AppState.activeProfileVaults),
       createVault(newVault) {
-        if (!newVault.isPublished) {
-          newVault.isPublished = true
-        }
+        // if (!newVault.isPublished) {
+        //   newVault.isPublished = false
+        // }
         state.newVault = {
           corn: AppState.userProfile.id
         }

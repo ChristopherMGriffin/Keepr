@@ -8,12 +8,12 @@ class VaultService {
     try {
       const res = await api.post('api/vaults', nv)
       logger.log('fe service', res.data)
-      if (nv.corn === AppState.user.id) {
+      if (nv.corn === AppState.userProfile.id) {
         profileService.getUserVaults(nv.corn)
         profileService.getProfileVaults(nv.corn)
       }
 
-      profileService.getProfileVaults(nv.corn)
+      profileService.getProfileVaults(AppState.userProfile.id)
     } catch (e) {
       logger.log(e)
     }

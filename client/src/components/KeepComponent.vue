@@ -24,9 +24,9 @@
               class="rounded bottom-right"
             />
           </router-link>
-          <p id="name" class="bottomer">
+          <!-- <p id="name" class="bottomer">
             {{ kprops.creator.name }}
-          </p>
+          </p> -->
         </div>
       </div>
       <div :id="'modelId' + kprops.id"
@@ -90,36 +90,8 @@
                       </div>
                     </div>
 
-                    <div class="row border-top border-dark mt-3 justify-content-center mr-1">
-                      <div class="p-1 col-12" id="tags">
-                        <button class="btn btn-link">
-                          tag 1
-                        </button>
-                        <button class="btn btn-link">
-                          tag 2
-                        </button>
-                        <button class="btn btn-link">
-                          tag 3
-                        </button>
-                        <button class="btn btn-link">
-                          tag 4
-                        </button>
-                        <button class="btn btn-link">
-                          tag 5
-                        </button>
-                        <button class="btn btn-link">
-                          tag 6
-                        </button>
-                        <button class="btn btn-link">
-                          tag 7
-                        </button>
-                        <button class="btn btn-link">
-                          tag 8
-                        </button>
-                      </div>
-                    </div>
-                    <div id="" class="row  pl-0 justify-content-space-between">
-                      <div class="col-3 pl-1">
+                    <div id="bottom" class="row border-top pt-2 pl-0">
+                      <div class="col-2 pl-1 mr-5">
                         <div>
                           <div class="btn-group btn-block dropup pl-0">
                             <button id="vaultdoor"
@@ -133,21 +105,21 @@
                             </button>
                             <div class="dropdown-menu">
                               <ul class="row p-0 m-0">
-                                <li class="col-12">
+                                <!-- <li class="col-12">
                                   <button type="button" class="btn btn-block btn-smbtn-link" data-toggle="modal" data-target="#modelId">
                                     Create New
                                   </button>
-                                </li>
+                                </li> -->
                                 <VaultMenuComponent v-for="v in userVaults" :key="v.id" :vprops="v" />
                               </ul>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div class="col pt-2">
-                        <i v-if="user.id == kprops.creatorId" id="trash" class="fas fa-trash fa-lg"></i>
+                      <div class="col-5 pt-2">
+                        <i v-if="userProfile.id == kprops.creatorId" @click="deleteKeep()" id="trash" class="fas fa-trash fa-lg"></i>
                       </div>
-                      <div class="col">
+                      <div class="col-3 pl-5 pr-0 mr-0 d-flex justify-content-end">
                         <span>
                           <img
                             :src="kprops.creator.picture"
@@ -251,7 +223,7 @@ ul {
 }
 .bottom-right {
   position: absolute;
-  bottom: 13px;
+  bottom: 8px;
   right: 8px;
   font-size: 7;
 }
@@ -270,5 +242,9 @@ ul {
 .bottom-right:hover {
   transform: scale(3);
 }
+// #bottom{
+//   position: absolute;
+//   bottom: 10px;
+// }
 
 </style>

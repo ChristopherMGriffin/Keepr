@@ -14,9 +14,8 @@
               {{ kprops.name }}
             </p>
           </a>
-          <i v-if="userProfile.id == kprops.creatorId" aria-hidden="true" data-dismiss="modal" @click="deleteKeep(kprops.id)" class="fas fa-trash top-left   "></i>
+          <i v-if="userProfile.id == kprops.creatorId" aria-hidden="true" data-dismiss="modal" @click="deleteKeep(kprops.id)" class="fas fa-trash top-left text-secondary"></i>
           <router-link :to="{ name: 'Profile', params: { profileId: kprops.creatorId} }">
-            <i class="ml-5 fa fa-user-circle bottom-right" aria-hidden="true"></i>
             <img
               :src="kprops.creator.picture"
               alt="user photo"
@@ -24,11 +23,6 @@
               class="rounded bottom-right"
             />
           </router-link>
-          <p>profileKeeps</p>
-          <p id="name" class="bottomer">
-            {{ kprops.creator.name }}
-          </p>
-          <!-- </router-link> -->
         </div>
       </div>
       <div :id="'modelId' + kprops.id"
@@ -79,20 +73,20 @@
                         </p>
                       </div>
                     </div>
-                    <div class="mb-3 header">
+                    <div class="mb-0 header">
                       <div class="row">
-                        <div class="ml-2 col-12">
+                        <div class="pl-3 col-12">
                           <h1>{{ kprops.name }}</h1>
                         </div>
                       </div>
                     </div>
-                    <div class="row" id="modal-description">
+                    <div class="row pb-5" id="modal-description">
                       <div class="col-12">
                         <p>{{ kprops.description }}</p>
                       </div>
                     </div>
 
-                    <div class="row border-top border-dark mt-3 justify-content-center mr-1">
+                    <!-- <div class="row border-top border-dark mt-3 justify-content-center mr-1">
                       <div class="p-1 col-12" id="tags">
                         <button class="btn btn-link">
                           tag 1
@@ -119,9 +113,9 @@
                           tag 8
                         </button>
                       </div>
-                    </div>
-                    <div id="" class="row  pl-0 justify-content-space-between">
-                      <div class="col-3 pl-1">
+                    </div> -->
+                    <div id="" class="row border-top pt-3 ml-0 mt-1 justify-content-space-between bottom">
+                      <div class="col-2 mr-1 pl-1">
                         <div>
                           <div class="btn-group btn-block dropup pl-0">
                             <button id="vaultdoor"
@@ -147,10 +141,10 @@
                           </div>
                         </div>
                       </div>
-                      <div class="col pt-2">
-                        <i id="trash" class="fas fa-trash fa-lg"></i>
+                      <div class="col-3 mx-5 pt-2">
+                        <i v-if="userProfile.id == activeProfile.id" id="trash" @click="deleteKeep()" class="fas fa-trash fa-lg ml-3"></i>
                       </div>
-                      <div class="col">
+                      <div class="col-3 pl-5 pr-0 mr-0 d-flex justify-content-end">
                         <span>
                           <img
                             :src="kprops.creator.picture"
@@ -269,6 +263,10 @@ ul {
   position: absolute;
   top: 5px;
   left: 5px
+}
+.bottom {
+  position: absolute;
+  bottom: 5px;
 }
 
 </style>

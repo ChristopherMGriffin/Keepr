@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary row justify-content-between">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary row justify-content-between fixed-top py-0">
     <div class="col-1 pl-1">
       <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
         <div class="d-flex flex-column align-items-center p-sm-0">
@@ -21,11 +21,6 @@
           </button>
         </span>
       </div>
-      <!-- </div> -->
-      <!-- <div class="form-group m-auto s-bar">
-        <span class="fa fa-search form-control-feedback m-lens my-auto"></span>
-        <input type="text" class="form-control">
-      </div> -->
     </div>
     <div class="col-1 d-flex justify-content-end">
       <button
@@ -54,14 +49,14 @@
       </ul> -->
         <span class="navbar-text ">
           <button
-            class="btn btn-outline-primary text-uppercase"
+            class="btn btn-outline-secondary text-uppercase"
             @click="login"
             v-if="!user.isAuthenticated"
           >
             Login
           </button>
 
-          <div class="dropdown" v-else>
+          <div class="dropdown ml-5" v-if="user.isAuthenticated">
             <div
               class="dropdown-toggle text-secondary"
               @click="state.dropOpen = !state.dropOpen"
@@ -72,14 +67,14 @@
                 height="40"
                 class="rounded"
               />
-              <span class="mx-3 text-secondary">{{ userProfile.name }}</span>
+              <!-- <span class="mx-3 text-secondary">{{ userProfile.name }}</span> -->
             </div>
             <div
               class="dropdown-menu py-0 mr-1 list-group w-100"
               :class="{ show: state.dropOpen }"
               @click="state.dropOpen = false"
             >
-              <router-link :to="{ name: 'Profile' }">
+              <router-link :to="{ name: 'Profile', params: {profileId: userProfile.id} }">
                 <div class="list-group-item list-group-item-action hoverable">
                   Profile
                 </div>
@@ -153,9 +148,6 @@ a:hover {
 .left{
   position: absolute;
   right: .05%
-}
-i{
-  color: #636e72;
 }
 
 </style>

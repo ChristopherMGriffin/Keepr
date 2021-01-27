@@ -61,6 +61,14 @@
 -- UPDATE profiles SET picture = 'https://www.usmagazine.com/wp-content/uploads/David-Spade-Joe-Dirt-467.jpg?w=400&quality=86&strip=all' WHERE id = '587f6a76-aaf4-48ba-9ee9-005879a94da7'
 -- TRUNCATE TABLE vaultkeeps
 
+-- ALTER TABLE vaults
+-- DROP COLUMN isPrivate
+-- ADD COLUMN isPublished TINYINT DEFAULT 1
+-- DROP COLUMN img
+-- ADD COLUMN img VARCHAR(255) NOT NULL
+-- DROP COLUMN isPublished
+-- ADD COLUMN isPublished TINYINT
+
 
 
 

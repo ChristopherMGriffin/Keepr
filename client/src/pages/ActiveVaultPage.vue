@@ -2,7 +2,12 @@
   <div class="ActiveVaultPage mt-5 container">
     <div class="row">
       <div class="col-12">
-        <h1>{{ activeVault.name }}<i class="ml-3 fa fa-trash fa-xs" @click="deleteVault(activeVault.id)" aria-hidden="true"></i></h1>
+        <h1>{{ activeVault.name }}</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <h2>{{activeVault.description}}</h2>
       </div>
     </div>
     <div class="row">
@@ -11,13 +16,12 @@
       </div>
     </div>
     <div class="card-columns p-0">
-      <VaultKeepComponent v-for="vk in activeVaultKeeps" :key="vk.id" :vkprops="vk" />
+      <vault-keep v-for="vk in activeVaultKeeps" :key="vk.id" :vkprops="vk" />
     </div>
   </div>
 </template>
 
 <script>
-import VaultKeepComponent from '../components/VaultKeep'
 import { computed, onMounted } from 'vue'
 import { AppState } from '../AppState'
 import { vaultService } from '../services/VaultsService'
@@ -25,7 +29,7 @@ import { useRoute } from 'vue-router'
 export default {
   name: 'ActiveVaultPage',
   props: ['kprops'],
-  components: { VaultKeepComponent },
+  components: { },
   setup(props) {
     const route = useRoute()
     onMounted(() => {

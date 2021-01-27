@@ -31,9 +31,9 @@ namespace amazen_server.Services
     {
       string sql = @"
       INSERT INTO vaults
-      (name, creatorId, isPublished, description)
+      (name, creatorId, isPublished, description, img)
       VALUES
-      (@Name, @CreatorId, @IsPublished, @Description)
+      (@Name, @CreatorId, @IsPublished, @Description, @Img)
       ;SELECT LAST_INSERT_ID()";
       
       return _db.ExecuteScalar<int>(sql, newVault);
