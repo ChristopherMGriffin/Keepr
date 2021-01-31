@@ -70,7 +70,7 @@
               <!-- <span class="mx-3 text-secondary">{{ userProfile.name }}</span> -->
             </div>
             <div
-              class="dropdown-menu py-0 mr-1 list-group w-100"
+              class="dropdown-menu dropdown-menu-right py-0 mr-1 list-group w-100"
               :class="{ show: state.dropOpen }"
               @click="state.dropOpen = false"
             >
@@ -83,7 +83,7 @@
                 class="list-group-item list-group-item-action hoverable"
                 @click="logout"
               >
-                logout
+                Logout
               </div>
             </div>
           </div>

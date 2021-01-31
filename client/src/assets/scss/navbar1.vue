@@ -33,7 +33,6 @@
       >
         Log Out
       </button>
-
     </div>
   </nav>
 </template>

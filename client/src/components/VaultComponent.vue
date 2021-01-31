@@ -4,18 +4,18 @@
     <div class="col container p-0">
       <img class="card-img" :src="vprops.img" alt="">
       <div class="card-img-overlay h-100">
-         <i v-if="userProfile.id == vprops.creatorId" aria-hidden="true" data-dismiss="modal" @click="deleteVault(vprops.id)" class="fas fa-trash top-left text-secondary"></i>
+        <i v-if="userProfile.id == vprops.creatorId" aria-hidden="true" data-dismiss="modal" @click="deleteVault(vprops.id)" class="fas fa-trash top-left text-secondary"></i>
         <router-link @click="getActiveVault(vprops.id)" :to="{ name: 'ActiveVault', params: { vaultId: vprops.id} }">
-          <h6 class="drop">
+          <h6 class="drop text-primary">
             {{ vprops.name }}
           </h6>
         </router-link>
         <!-- <i v-if="userProfile.id == vprops.creatorId" @click="deleteVault(vprops.id)" class="upper-left fa fa-trash" aria-hidden="true"></i> -->
-        <h6 class="text-light ml-5">
+        <!-- <h6 class="text-light ml-5">
           {{ vprops.id }}
-        </h6>
-        <h6 class="text-light ">
-          Is Published:  {{ vprops.isPublished }}
+        </h6> -->
+        <h6 v-if="!vprops.isPublished" class="text-light ">
+          Draft
         </h6>
       </div>
     </div>

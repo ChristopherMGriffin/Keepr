@@ -120,9 +120,10 @@
     <div class="row mt-5">
       <h1 class="subheader ml-4">
         Vaults
-      </h1><button v-if="userProfile.id == activeProfile.id" data-target="#VaultCenter" data-toggle="modal" class="btn btn-sm btn-link">
-        <h1>+</h1>
-      </button>
+      </h1>
+      <h1 v-if="userProfile.id == activeProfile.id" data-target="#VaultCenter" data-toggle="modal" class="plus">
+        +
+      </h1>
     </div>
     <div id="vault-row" class="d-flex h100">
       <VaultComponent v-for="v in activeProfileVaults" :key="v.id" :vprops="v" />
@@ -130,9 +131,10 @@
     <div class="row mt-5">
       <h1 class="subheader ml-4">
         Keeps
-      </h1><button v-if="userProfile.id == activeProfile.id" data-toggle="modal" data-target="#KeepCenter" class="btn btn-sm btn-link">
-        <h1>+</h1>
-      </button>
+      </h1>
+      <h1 v-if="userProfile.id == activeProfile.id" data-toggle="modal" data-target="#KeepCenter" class="plus">
+        +
+      </h1>
       <div class="card-columns p-3">
         <ProfileKeep v-for="k in activeProfileKeeps" :key="k.id" :kprops="k" />
       </div>
@@ -208,8 +210,11 @@ h1 {
 .pic {
 width: 100%;
 }
-#plus {
-  color:#55efc4
+.plus {
+  color:#97bdb2
+}
+.plus:hover{
+  cursor: pointer;
 }
 @media (min-width: 12em) {
     .card-columns {
@@ -255,4 +260,5 @@ width: 100%;
   background-color: #55efc4;
   border-color: #55efc4;
 }
+
 </style>

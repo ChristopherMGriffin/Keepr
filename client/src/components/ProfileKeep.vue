@@ -10,19 +10,19 @@
         >
         <div class="ml-0 mb-0 p-0 text-white card-img-overlay h-100 d-flex flex-column justify-content-end">
           <a href="#" @click="getOne(kprops.id)" class="text-white text-left" data-toggle="modal" :data-target="'#modelId' + kprops.id">
-            <p class="align-self-start mb-1 ml-1">
+            <p class="text-primary align-self-start mb-1 ml-1">
               {{ kprops.name }}
             </p>
           </a>
           <i v-if="userProfile.id == kprops.creatorId" aria-hidden="true" data-dismiss="modal" @click="deleteKeep(kprops.id)" class="fas fa-trash top-left text-secondary"></i>
-          <router-link :to="{ name: 'Profile', params: { profileId: kprops.creatorId} }">
+          <!-- <router-link :to="{ name: 'Profile', params: { profileId: kprops.creatorId} }">
             <img
               :src="kprops.creator.picture"
               alt="user photo"
               height="15"
               class="rounded bottom-right"
             />
-          </router-link>
+          </router-link> -->
         </div>
       </div>
       <div :id="'modelId' + kprops.id"
@@ -144,7 +144,7 @@
                       <div class="col-3 mx-5 pt-2">
                         <i v-if="userProfile.id == activeProfile.id" id="trash" @click="deleteKeep()" class="fas fa-trash fa-lg ml-3"></i>
                       </div>
-                      <div class="col-3 pl-5 pr-0 mr-0 d-flex justify-content-end">
+                      <!-- <div class="col-3 pl-5 pr-0 mr-0 d-flex justify-content-end">
                         <span>
                           <img
                             :src="kprops.creator.picture"
@@ -153,7 +153,7 @@
                             class="rounded"
                           />
                         </span>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
                 </div>
