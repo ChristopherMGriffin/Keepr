@@ -121,7 +121,7 @@
       <h1 class="subheader ml-4">
         Vaults
       </h1>
-      <h1 v-if="userProfile.id == activeProfile.id" data-target="#VaultCenter" data-toggle="modal" class="plus">
+      <h1 v-if="userProfile.id == activeProfile.id" data-target="#VaultCenter" data-toggle="modal" class="text-success plus">
         +
       </h1>
     </div>
@@ -132,7 +132,7 @@
       <h1 class="subheader ml-4">
         Keeps
       </h1>
-      <h1 v-if="userProfile.id == activeProfile.id" data-toggle="modal" data-target="#KeepCenter" class="plus">
+      <h1 v-if="userProfile.id == activeProfile.id" data-toggle="modal" data-target="#KeepCenter" class="text-success plus">
         +
       </h1>
       <div class="card-columns p-3">
@@ -210,9 +210,7 @@ h1 {
 .pic {
 width: 100%;
 }
-.plus {
-  color:#97bdb2
-}
+
 .plus:hover{
   cursor: pointer;
 }

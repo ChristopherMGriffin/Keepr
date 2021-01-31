@@ -42,11 +42,11 @@
               <div class="container-fluid ">
                 <div class="row">
                   <div class="col-5 ">
-                    <div class="row">
-                      <img id="modal-image" :src="kprops.img" alt="">
+                    <div class="row center">
+                      <img class="" style="width: auto; height: 100%" id="modal-image" :src="kprops.img" alt="">
                     </div>
                   </div>
-                  <div class="col-7">
+                  <div class="col-7 container align-items-between">
                     <div class="row">
                       <div class="col-12">
                         <button type="button" class="close btn btn-lg" data-dismiss="modal" aria-label="Close">
@@ -89,8 +89,7 @@
                         <p>{{ kprops.description }}</p>
                       </div>
                     </div>
-
-                    <div id="bottom" class="row border-top pt-2 pl-0">
+                    <div id="card-bottom" class="row border-top pt-2 pl-0">
                       <div class="col-2 pl-1 mr-5">
                         <div>
                           <div class="btn-group btn-block dropup pl-0">
@@ -105,11 +104,16 @@
                             </button>
                             <div class="dropdown-menu">
                               <ul class="row p-0 m-0">
-                                <!-- <li class="col-12">
-                                  <button type="button" class="btn btn-block btn-smbtn-link" data-toggle="modal" data-target="#modelId">
-                                    Create New
-                                  </button>
-                                </li> -->
+                                <li class="col">
+                                  <p class="text-dark">
+                                    Private
+                                  </p>
+                                </li>
+                                <li class="col">
+                                  <p class="text-success">
+                                    Public
+                                  </p>
+                                </li>
                                 <VaultMenuComponent v-for="v in userVaults" :key="v.id" :vprops="v" />
                               </ul>
                             </div>
@@ -125,7 +129,7 @@
                             :src="kprops.creator.picture"
                             alt="user photo"
                             height="40"
-                            class="rounded"
+                            class="rounded move-right"
                           />
                         </span>
                       </div>
@@ -195,13 +199,11 @@ export default {
 i {
   color:#55efc4 ;
 }
-i:hover {
-  transform: scale(1.5);
-}
-
+// i:hover {
+//   transform: scale(1.5);
+// }
 .clr {
-  color:#55efc4 ;
-
+  color:#55efc4;
 }
 #modal-description {
   max-height: 15em;
@@ -230,6 +232,7 @@ ul {
 #card-bottom {
   position: absolute;
   bottom: 5px;
+  width: 100%
 }
 .bottomer {
   position: absolute;
@@ -242,9 +245,9 @@ ul {
 .bottom-right:hover {
   transform: scale(3);
 }
-// #bottom{
-//   position: absolute;
-//   bottom: 10px;
-// }
+.move-right{
+  position: absolute;
+  right: -12px;
+}
 
 </style>

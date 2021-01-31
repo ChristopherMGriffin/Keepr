@@ -1,5 +1,5 @@
 <template>
-  <li class="VaultMenuComponent col-12">
+  <li class="VaultMenuComponent col-12 d-flex justify-content-center">
     <router-link :to="{ name: 'ActiveVault', params: { vaultId: vprops.id} }">
       <button
         type="button"
@@ -7,7 +7,8 @@
         @click="addToVault(vprops.id)"
         data-dismiss="modal"
       >
-        <p>{{ vprops.name }}</p>
+        <p class="pl-0 text-success" v-if="vprops.isPublished">{{ vprops.name }}</p>
+        <p class="pl-0 text-dark" v-else>{{ vprops.name }}</p>
       </button>
     </router-link>
   </li>

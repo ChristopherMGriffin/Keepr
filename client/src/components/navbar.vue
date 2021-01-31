@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary row justify-content-between fixed-top py-0">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success row justify-content-between fixed-top py-0">
     <div class="col-1 pl-1">
       <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
         <div class="d-flex flex-column align-items-center p-sm-0">
@@ -13,8 +13,8 @@
     </div>
     <div class="col-9 p-0 d-flex justify-content-center">
       <!-- <div class="row"> -->
-      <div class="input-group s-bar m-0">
-        <input class="form-control m-auto py-2 rounded" type="search" value="search" id="example-search-input">
+      <div class="input-group s-bar pl-5">
+        <input class="form-control ml-5 pl-2 rounded" type="search" value="search" id="example-search-input">
         <span class="input-group-append">
           <button class="btn left" type="button">
             <i class="fa fa-search"></i>
