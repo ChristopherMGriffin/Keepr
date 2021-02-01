@@ -14,7 +14,7 @@
     <div class="col-9 p-0 d-flex justify-content-center">
       <!-- <div class="row"> -->
       <div class="input-group s-bar pl-5">
-        <input class="form-control ml-5 pl-2 rounded" type="search" value="search" id="example-search-input">
+        <input class="form-control ml-5 pl-1 rounded" type="search" value="search" id="example-search-input">
         <span class="input-group-append">
           <button class="btn left" type="button">
             <i class="fa fa-search"></i>
@@ -58,14 +58,14 @@
 
           <div class="dropdown ml-5" v-if="user.isAuthenticated">
             <div
-              class="dropdown-toggle text-secondary"
+              class=" text-secondary"
               @click="state.dropOpen = !state.dropOpen"
             >
               <img
                 :src="userProfile.picture"
                 alt="user photo"
                 height="40"
-                class="rounded"
+                class="rounded dropdown-toggle picture"
               />
               <!-- <span class="mx-3 text-secondary">{{ userProfile.name }}</span> -->
             </div>
@@ -148,6 +148,9 @@ a:hover {
 .left{
   position: absolute;
   right: .05%
+}
+.picture:hover{
+  cursor: pointer;
 }
 
 </style>

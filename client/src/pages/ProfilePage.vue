@@ -97,14 +97,6 @@
                 <label for="" class="col-form-label">Description</label>
                 <textarea v-model="state.newKeep.description" class="form-control" name="inputfields" cols="30" rows="6"></textarea>
               </div>
-              <!-- <div class="form-group">
-                <label for="" class="col-form-label">Tags:</label>
-                <input type="text" class="form-control" name="inputfields" v-model="state.newKeep.tags" placeholder="Tags...">
-              </div> -->
-              <!-- <div class="form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option2" v-model="state.newKeep.isPublished">
-                <label for="" class="col-form-label">Save as Draft?</label>
-              </div> -->
               <div>
               </div>
             </div>
@@ -135,9 +127,9 @@
       <h1 v-if="userProfile.id == activeProfile.id" data-toggle="modal" data-target="#KeepCenter" class="text-success plus">
         +
       </h1>
-      <div class="card-columns p-3">
-        <ProfileKeep v-for="k in activeProfileKeeps" :key="k.id" :kprops="k" />
-      </div>
+    </div>
+    <div class="card-columns p-3">
+      <Keep v-for="k in activeProfileKeeps" :key="k.id" :kprops="k" />
     </div>
   </div>
 </template>
@@ -178,9 +170,6 @@ export default {
       activeProfileKeeps: computed(() => AppState.activeProfileKeeps),
       activeProfileVaults: computed(() => AppState.activeProfileVaults),
       createVault(newVault) {
-        // if (!newVault.isPublished) {
-        //   newVault.isPublished = false
-        // }
         state.newVault = {
           corn: AppState.userProfile.id
         }

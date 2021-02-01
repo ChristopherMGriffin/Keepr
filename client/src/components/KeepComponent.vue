@@ -9,24 +9,30 @@
           alt="Card image cap"
         >
         <div class="ml-0 mb-0 p-0 text-white card-img-overlay h-100 d-flex flex-column justify-content-end">
-          <a href="#" @click="getOne(kprops.id)" class="text-white text-left" data-toggle="modal" :data-target="'#modelId' + kprops.id">
+          <div v-if="userProfile.id == kprops.creatorId && $route.name !== 'ActiveVault'" @click="deleteKeep(kprops.id)" class="trash justify-content-center d-flex rounded p-1">
+            <i aria-hidden="true" data-dismiss="modal" class="fas fa-trash fa-sm text-secondary"></i>
+          </div>
 
-            <p class="align-self-start mb-1 ml-1">
-              {{ kprops.name }}
-            </p>
+          <div v-if="userProfile.id == activeVault.creatorId && $route.name == 'ActiveVault'" @click="deleteVaultKeep(kprops)" class="trash justify-content-center d-flex rounded p-1">
+            <i aria-hidden="true" data-dismiss="modal" class="fas fa-trash fa-sm text-secondary"></i>
+          </div>
+
+          <a href="#" @click="getOne(kprops.id)" class="text-white text-left" data-toggle="modal" :data-target="'#modelId' + kprops.id">
+            <div>
+              <h6 class=" p-1 rounded mx-auto drop text-secondary d-flex justify-content-center">
+                {{ kprops.name }}
+              </h6>
+            </div>
           </a>
           <router-link :to="{ name: 'Profile', params: { profileId: kprops.creatorId} }">
-            <!-- <i class="ml-5 fa fa-user-circle bottom-right" aria-hidden="true"></i> -->
             <img
               :src="kprops.creator.picture"
               alt="user photo"
-              height="15"
+              height="20"
               class="rounded bottom-right"
+              v-show="$route.name !== 'Profile'"
             />
           </router-link>
-          <!-- <p id="name" class="bottomer">
-            {{ kprops.creator.name }}
-          </p> -->
         </div>
       </div>
       <div :id="'modelId' + kprops.id"
@@ -46,7 +52,7 @@
                       <img class="" style="width: auto; height: 100%" id="modal-image" :src="kprops.img" alt="">
                     </div>
                   </div>
-                  <div class="col-7 container align-items-between">
+                  <div class="col-7 mb-0 pb-0">
                     <div class="row">
                       <div class="col-12">
                         <button type="button" class="close btn btn-lg" data-dismiss="modal" aria-label="Close">
@@ -95,10 +101,11 @@
                           <div class="btn-group btn-block dropup pl-0">
                             <button id="vaultdoor"
                                     type="button"
-                                    class="ml-0 btn border rounded dropdown-toggle"
+                                    class="ml-0 my-0 btn border rounded dropdown-toggle"
                                     data-toggle="dropdown"
                                     aria-haspopup="true"
                                     aria-expanded="false"
+                                    :disabled="!user.isAuthenticated ? '' : disabled"
                             >
                               Add To Vault
                             </button>
@@ -114,14 +121,29 @@
                                     Public
                                   </p>
                                 </li>
-                                <VaultMenuComponent v-for="v in userVaults" :key="v.id" :vprops="v" />
+                                <li v-for="v in userVaults" :key="v.id" :vprops="v" class="VaultMenuComponent col-12 d-flex justify-content-center">
+                                  <router-link :to="{ name: 'ActiveVault', params: { vaultId: v.id} }">
+                                    <button
+                                      type="button"
+                                      class="btn btn-sm btn-lg btn-link"
+                                      @click="addToVault(v.id)"
+                                      data-dismiss="modal"
+                                    >
+                                      <p class="pl-0 text-success" v-if="v.isPublished">
+                                        {{ v.name }}
+                                      </p>
+                                      <p class="pl-0 text-dark" v-else>
+                                        {{ v.name }}
+                                      </p>
+                                    </button>
+                                  </router-link>
+                                </li>
                               </ul>
                             </div>
                           </div>
                         </div>
                       </div>
                       <div class="col-5 pt-2">
-                        <i v-if="userProfile.id == kprops.creatorId" @click="deleteKeep()" id="trash" class="fas fa-trash fa-lg"></i>
                       </div>
                       <div class="col-3 pl-5 pr-0 mr-0 d-flex justify-content-end">
                         <span>
@@ -129,7 +151,7 @@
                             :src="kprops.creator.picture"
                             alt="user photo"
                             height="40"
-                            class="rounded move-right"
+                            class="rounded move-right mb-3"
                           />
                         </span>
                       </div>
@@ -149,13 +171,11 @@
 import { computed, reactive } from 'vue'
 import { keepService } from '../services/KeepService'
 import { AppState } from '../AppState'
-import VaultMenuComponent from './VaultMenuComponent.vue'
 import { profileService } from '../services/ProfileService'
-import { logger } from '../utils/Logger'
 import { vaultService } from '../services/VaultsService'
 export default {
   name: 'Keep',
-  props: ['kprops', 'vprops'],
+  props: ['kprops', 'vprops', 'vkprops'],
   setup(props) {
     const state = reactive({
       editedKeep: {}
@@ -167,6 +187,7 @@ export default {
       userProfile: computed(() => AppState.userProfile),
       activeKeep: computed(() => AppState.activeKeep),
       userVaults: computed(() => AppState.userVaults),
+      activeVault: computed(() => AppState.activeVault),
       deleteKeep(id) {
         keepService.deleteKeep(id)
       },
@@ -180,12 +201,14 @@ export default {
         profileService.getOneProfile(id)
       },
       addToVault(vId) {
-        logger.log('vid', vId)
         vaultService.createVaultKeep(vId)
+      },
+      deleteVaultKeep(vk) {
+        vaultService.deleteVaultKeep(vk)
       }
     }
   },
-  components: { VaultMenuComponent }
+  components: {}
 }
 </script>
 
@@ -199,9 +222,6 @@ export default {
 i {
   color:#55efc4 ;
 }
-// i:hover {
-//   transform: scale(1.5);
-// }
 .clr {
   color:#55efc4;
 }
@@ -209,45 +229,50 @@ i {
   max-height: 15em;
   overflow-y: auto;
 }
-#trash {
-  color: gray;
-}
+
 #vaultdoor {
   color: #55efc4;
 }
-#tags {
-  white-space: nowrap;
-  overflow-x: auto;
-  margin-bottom: 3px;
-}
-ul {
+ul{
   list-style-type: none;
 }
 .bottom-right {
   position: absolute;
-  bottom: 8px;
+  bottom: 5px;
   right: 8px;
   font-size: 7;
 }
 #card-bottom {
   position: absolute;
-  bottom: 5px;
+  bottom: 0%;
   width: 100%
 }
 .bottomer {
   position: absolute;
-  bottom: -14px;
+  bottom: -15px;
   right: 5px;
 }
- #name {
-   font-size: 9px;
-}
 .bottom-right:hover {
-  transform: scale(3);
+  transform: scale(1.5);
 }
 .move-right{
   position: absolute;
   right: -12px;
 }
-
+.trash{
+  background-color: white;
+  width: 20px;
+  position: absolute;
+  left: 5px;
+  top: 5px;
+}
+.trash:hover{
+  cursor: pointer;
+}
+.drop {
+  position: absolute;
+  bottom: -3px;
+  left: 4px;
+  background-color: white;
+}
 </style>

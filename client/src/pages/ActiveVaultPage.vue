@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="card-columns p-0">
-      <vault-keep v-for="vk in activeVaultKeeps" :key="vk.id" :vkprops="vk" />
+      <keep v-for="k in activeVaultKeeps" :key="k.id" :kprops="k" />
     </div>
   </div>
 </template>
@@ -42,6 +42,9 @@ export default {
       activeVault: computed(() => AppState.activeVault),
       deleteVault(id) {
         vaultService.deleteVault(id)
+      },
+      deleteVaultKeep(vk) {
+        vaultService.deleteVaultKeep(vk)
       }
     }
   }

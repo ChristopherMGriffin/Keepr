@@ -1,6 +1,5 @@
 <template>
   <div class="m-1 VaultComponent">
-    <!--Card image-->
     <div class="col container p-0">
       <img class="card-img" :src="vprops.img" alt="">
       <div class="card-img-overlay h-100">
@@ -14,10 +13,6 @@
             </h6>
           </div>
         </router-link>
-        <!-- <i v-if="userProfile.id == vprops.creatorId" @click="deleteVault(vprops.id)" class="upper-left fa fa-trash" aria-hidden="true"></i> -->
-        <!-- <h6 class="text-light ml-5">
-          {{ vprops.id }}
-        </h6> -->
         <div v-if="!vprops.isPublished" class="private d-flex justify-content-center py-1 rounded">
           <i class="fa text-secondary fa-user-secret" aria-hidden="true"></i>
         </div>

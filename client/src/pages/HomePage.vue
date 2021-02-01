@@ -1,8 +1,10 @@
 <template>
   <div class="home flex-grow-1 d-flex align-items-center container-fluid">
-    <div class="card-columns p-3">
-      <Keep v-for="keep in publicKeeps" :key="keep.id" :kprops="keep" />
-    </div>
+    <transition-group name="custom">
+      <div class="card-columns p-3">
+        <Keep v-for="keep in publicKeeps" :key="keep.id" :kprops="keep" />
+      </div>
+    </transition-group>
   </div>
 </template>
 
