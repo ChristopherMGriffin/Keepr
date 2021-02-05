@@ -16,7 +16,6 @@
         </div>
       </div>
     </div>
-    <!-- Button trigger modal -->
 
     <!-- Modal -->
     <div class="modal fade"

@@ -73,7 +73,7 @@
                                src="../assets/img/klogo.png"
                                height="20"
                           />
-                          {{ activeKeep.keeps }}
+                          {{ activeKeep.timesKept }}
                         </p>
                       </div>
                       <div class="col-3 pl-0">
